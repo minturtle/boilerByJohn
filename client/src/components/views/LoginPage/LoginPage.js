@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { LoginUser } from '../../../_action/user_action';
+import { withRouter } from 'react-router-dom';
 
 function LoginPage(props){
 	
@@ -24,7 +25,8 @@ function LoginPage(props){
 				let body = {email : Email, password : Password};
 				
 				dispatch(LoginUser(body)).then((res)=>{
-					if(res.payload.loginSuccess){
+					console.log(res.payload.success);
+					if(res.payload.success){
 						props.history.push('/');
 					}
 					else{
@@ -59,4 +61,4 @@ function LoginPage(props){
 	)	
 	}
 
-export default LoginPage
+export default withRouter(LoginPage)

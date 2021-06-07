@@ -19,7 +19,7 @@ router.post('/login', (req,res)=>{
 
 
 router.get('/auth',auth,(req,res)=>{
-	if(req.user == null) return res.status(404).json({message : "요청실패"});
+	if(req.user == null) return res.status(200).json({message : "요청실패"});
 	res.status(200).json({
 		_id : req.user._id,
 		isAdmin : req.user.role === 0 ? false : true,
@@ -30,7 +30,7 @@ router.get('/auth',auth,(req,res)=>{
 
 
 router.get('/logout',auth, (req, res)=>{
-	if(req.user == null) return res.status(404).json({message : "요청실패"});
+	if(req.user == null) return res.status(200).json({message : "요청실패"});
 	User.findOneAndUpdate({_id : req.user._id}, { token : ""}, (err, user)=>{
 		if(err) return res.json({success: false , err});
 		res.clearCookie('x_auth');
